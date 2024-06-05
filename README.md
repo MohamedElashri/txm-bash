@@ -29,7 +29,7 @@
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/txm.git
+   git clone https://github.com/MohamedElashri/txm-bash
    ```
 
 2. Change into the `txm` directory:
