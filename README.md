@@ -92,6 +92,8 @@ For a complete list of available commands and their usage, refer to the man page
 man txm
 ```
 
+Or you can consult the [documentation](docs.md)
+
 ## Configuration
 
 `txm` can be configured using a configuration file located at `$HOME/.txm/config`. The configuration file allows you to set default options and customize the behavior of `txm`.
