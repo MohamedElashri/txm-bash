@@ -9,6 +9,9 @@ NC='\033[0m' # No Color
 # GitHub repository URL
 REPO_URL="https://github.com/MohamedElashri/txm-bash"
 
+# Detect the operating system
+OS=$(uname)
+
 # Check if Bash is installed
 if ! command -v bash &> /dev/null
 then
@@ -20,8 +23,12 @@ fi
 if ! command -v tmux &> /dev/null
 then
     echo -e "${YELLOW}Warning: tmux is not installed. Installing tmux...${NC}"
-    sudo apt-get update
-    sudo apt-get install -y tmux
+    if [[ "$OS" == "Darwin" ]]; then
+        brew install tmux
+    else
+        sudo apt-get update
+        sudo apt-get install -y tmux
+    fi
 fi
 
 # Check if txm is already installed
@@ -62,8 +69,14 @@ sudo chmod +x /usr/local/bin/txm
 # Create the necessary configuration directories
 mkdir -p "$HOME/.txm/layouts"
 
+# Set the man page directory based on the operating system
+if [[ "$OS" == "Darwin" ]]; then
+    man_dir="/usr/local/share/man/man1"
+else
+    man_dir="/usr/local/man/man1"
+fi
+
 # Check if the man page directory exists
-man_dir="/usr/local/share/man/man1"
 if [[ ! -d "$man_dir" ]]
 then
     echo -e "${YELLOW}Warning: Man page directory does not exist. Creating...${NC}"
@@ -76,7 +89,11 @@ sudo cp "$temp_dir/txm.1" "$man_dir/"
 
 # Update the man page index
 echo -e "${GREEN}Updating man page index...${NC}"
-sudo mandb
+if [[ "$OS" == "Darwin" ]]; then
+    sudo /usr/libexec/makewhatis "$man_dir"
+else
+    sudo mandb
+fi
 
 # Clean up the temporary directory
 rm -rf "$temp_dir"
