@@ -26,6 +26,9 @@
 
 ### Installation Steps
 
+
+#### Recommended Method
+
 1. Clone the repository:
 
    ```bash
@@ -51,6 +54,24 @@
    - Update the man page index
 
 4. Source your shell's configuration file (e.g., `~/.bashrc`, `~/.zshrc`) or start a new shell session for the changes to take effect.
+
+#### Easy Method
+
+An easier but not recommended and really you shouldn't be doing it is using `curl` or `wget` to fetch the script and pipe it to bash. 
+
+Here’s how you can do it:
+
+
+Using curl
+
+```bash
+bash <(curl -s https://raw.githubusercontent.com/MohamedElashri/txm-bash/main/install.sh)
+```
+Using wget
+
+```bash
+bash <(wget -qO- https://raw.githubusercontent.com/MohamedElashri/txm-bash/main/install.sh)
+```
 
 ## Usage
 
